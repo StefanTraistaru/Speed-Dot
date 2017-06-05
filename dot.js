@@ -1,17 +1,22 @@
 function Dot(up, down, left, right) {
+    
+    // These are the limits of the playable area
     this.upM = up;
     this.downM = down;
     this.leftM = left;
     this.rightM = right;
     
-    // Dimension is 2% of playable surface
+    // Dot dimension is 2% of playable surface
     this.dim = floor((this.downM - this.upM) * 0.02);
     // Speed is 10% of initial dimension
     this.speed = ceil(this.dim * 0.1);
     this.increment = this.dim * 0.05;
+    // The limit the dot can can go near the margins
+    // 50% will be to hard to handle around the walls at higher speeds
+    this.limit = floor(this.dim * 0.475);
     
     // Setting the initial coordinates at 50%width and 40%(playable surface height)
-    // 50% windwWidth == 50%(playable surface width)
+    // 50% windowWidth == 50%(playable surface width)
     this.x = floor(windowWidth/2);
     this.y = floor((this.downM - this.upM)/2 + windowHeight * 0.04);
     
@@ -49,12 +54,11 @@ function Dot(up, down, left, right) {
     }
     
     
-    var limit = floor(this.dim * 0.475);
     // Verifing if the dot is x_x(DEAD) = if it hits the margins
     this.update = function() {
-        if(this.x < (this.leftM + limit) || this.x > (this.rightM - limit))
+        if(this.x < (this.leftM + this.limit) || this.x > (this.rightM - this.limit))
             this.speed = 0;
-        if(this.y < (this.upM + limit) || this.y > (this.downM - limit))
+        if(this.y < (this.upM + this.limit) || this.y > (this.downM - this.limit))
             this.speed = 0;       
     }
     

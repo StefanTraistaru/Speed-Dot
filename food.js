@@ -1,18 +1,15 @@
 function Food(up, down, left, right) {
-    // Specially not placing the food near the margins
+    
+    // Intentionally not placing the food near the margins
     // (impossible to get at higher speeds)
     this.upM = up + 10;
     this.downM = down - 10;
     this.leftM = left + 10;
     this.rightM = right - 10;
     
+    // Food dimension
     this.dim = floor((this.downM - this.upM) * 0.02);
     
-    // food's x and y coordinates get new values is the current food is eaten
-    this.getXY = function(x, y) {
-        this.x = x;
-        this.y = y;
-    }
     
     // Showing the food
     this.show = function() {
@@ -20,6 +17,23 @@ function Food(up, down, left, right) {
         rectMode(CENTER);
         rect(this.x, this.y, this.dim, this.dim);
     }
+    
+    
+    // Food's x and y coordinates get new values if the current food is eaten
+    this.getXY = function(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    
+    // This will call de "getXY" function
+    this.update = function() {
+        if (this.isEaten == true) {
+            food.getXY(random(this.leftM, this.rightM),
+                   random(this.upM, this.downM));
+        }
+    }
+    
     
     // Checking if the food is eaten or not
     this.eat = function(x, y) {
@@ -34,14 +48,5 @@ function Food(up, down, left, right) {
             this.isEaten = true;
         else this.isEaten = false;
     }
-    
-    
-    // This will call de "getXY" function
-    this.update = function() {
-        if (this.isEaten == true) {
-            food.getXY(random(this.leftM, this.rightM),
-                   random(this.upM, this.downM));
-        }
-    }
-    
+
 }

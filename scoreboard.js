@@ -1,7 +1,7 @@
-function ScoreBoard(x, y, z) {
-    this.width = x;
-    this.height = y;
-    this.padding = z;
+function ScoreBoard(width, height, padding) {
+    this.width = width;
+    this.height = height;
+    this.padding = padding;
     
     this.show = function() {
         fill(70);

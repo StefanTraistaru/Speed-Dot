@@ -11,8 +11,6 @@ function Surface(width, height, error, padding) {
         
         rect(floor(windowWidth/2), floor(this.padding + this.height/2),
              floor(this.width - this.error), floor(this.height - this.error));
-        
-        
     }
     
 }

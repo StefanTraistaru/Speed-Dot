@@ -24,7 +24,9 @@ function setup() {
 
 
 function draw() {
-    // Background + Surface
+    
+    // Early implemention of the 2 main scenes:
+    // the game and the ending screen
     if (dot.speed == 0) {
     
         background(50, 50, 50);
@@ -46,7 +48,6 @@ function draw() {
             textSize(sizeTxt * 0.75);
             text("Best score: " + bestScore, windowWidth/2 * 0.8, windowHeight * 0.4);
             text("Your score: " + this.score, windowWidth/2 * 1.2, windowHeight * 0.4);
-            //line();
         }
         else {
             textSize(sizeTxt * 0.75);
@@ -60,6 +61,7 @@ function draw() {
             nhs = 0;
         }
         
+        // Position of the score
         textSize(sizeTxt * 0.25);
         text("Made by Stefan Traistaru", windowWidth * 9/10, windowHeight * 0.95);
     }
@@ -105,12 +107,16 @@ function resetGame() {
     margins = new Surface(gameWidth, gameHeight, 0, padding);
     scoreBoard = new ScoreBoard(gameWidth, boardHeight, padding);
     dot = new Dot(padding + wall, padding + (gameHeight - wall) , 
-                      windowWidth/2 - (gameWidth-2*wall)/2, windowWidth/2 + (gameWidth-2*wall)/2);
+                  windowWidth/2 - (gameWidth-2*wall)/2, windowWidth/2 + (gameWidth-2*wall)/2);
     food = new Food(padding + wall, padding + (gameHeight - wall) , 
-                      windowWidth/2 - (gameWidth-2*wall)/2, windowWidth/2 + (gameWidth-2*wall)/2);
+                    windowWidth/2 - (gameWidth-2*wall)/2, windowWidth/2 + (gameWidth-2*wall)/2);
     
+    // Initial Settings
     score = 0;
     sizeTxt = floor(windowHeight * 0.065);
+    
+    // Cheap and less time consuming solution for diplaying the first piece of food
+    // Don't judge me
     food.isEaten = true;
     food.update();
 }
