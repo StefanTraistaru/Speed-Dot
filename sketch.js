@@ -24,17 +24,17 @@ function setup() {
 
 
 function draw() {
-    
+
     // Early implemention of the 2 main scenes:
     // the game and the ending screen
     if (dot.speed == 0) {
-    
+
         background(50, 50, 50);
         fill(255);
-        
+
         textAlign(CENTER);
         textStyle(BOLD);
-        
+
         if (bestScore < this.score) {
             bestScore = this.score;
             nhs = 1;
@@ -43,11 +43,11 @@ function draw() {
             textSize(sizeTxt);
             text("New High Score!", windowWidth/2, windowHeight * 0.2);
         }
-        
+
         if (bestScore != 0) {
             textSize(sizeTxt * 0.75);
-            text("Best score: " + bestScore, windowWidth/2 * 0.8, windowHeight * 0.4);
-            text("Your score: " + this.score, windowWidth/2 * 1.2, windowHeight * 0.4);
+            text("Best score: " + bestScore, windowWidth/2 * 0.7, windowHeight * 0.4);
+            text("Your score: " + this.score, windowWidth/2 * 1.3, windowHeight * 0.4);
         }
         else {
             textSize(sizeTxt * 0.75);
@@ -55,22 +55,22 @@ function draw() {
         }
         textSize(sizeTxt * 0.5);
         text("Press SPACEBAR to restart", windowWidth/2, windowHeight * 0.8);
-        
+
         if (keyIsDown(32)) {
             resetGame();
             nhs = 0;
         }
-        
+
         // Position of the score
         textSize(sizeTxt * 0.25);
-        text("Made by Stefan Traistaru", windowWidth * 9/10, windowHeight * 0.95);
+        text("Made by Stefan Traistaru", windowWidth * 8/10, windowHeight * 0.95);
     }
     else {
         background(50, 50, 50);
         margins.show(255);
         surface.show(0);
         scoreBoard.show();
-        
+
         // Dot + Food
         food.show();
         dot.show();
@@ -84,7 +84,7 @@ function draw() {
         food.update();
         dot.move();
         dot.update();
-        
+
         textSize(sizeTxt);
         textAlign(CENTER);
         textStyle(BOLD);
@@ -94,27 +94,35 @@ function draw() {
 }
 
 function resetGame() {
-    
+
     // Calculating game dimensions
     gameHeight = windowHeight * 0.8;
-    gameWidth = windowWidth * 0.6;
+    // Setting a gameWidth / gameHeight ratio of 16:10
+    gameWidth = 16/10 * gameHeight;
     wall = gameHeight * 0.02;
     boardHeight = windowHeight * 0.1;
     padding = windowHeight * 0.04;
-    
+
     // Creating objects
     surface = new Surface(gameWidth, gameHeight, wall, padding);
     margins = new Surface(gameWidth, gameHeight, 0, padding);
     scoreBoard = new ScoreBoard(gameWidth, boardHeight, padding);
-    dot = new Dot(padding + wall, padding + (gameHeight - wall) , 
+    dot = new Dot(padding + wall, padding + (gameHeight - wall) ,
                   windowWidth/2 - (gameWidth-2*wall)/2, windowWidth/2 + (gameWidth-2*wall)/2);
-    food = new Food(padding + wall, padding + (gameHeight - wall) , 
+    food = new Food(padding + wall, padding + (gameHeight - wall) ,
                     windowWidth/2 - (gameWidth-2*wall)/2, windowWidth/2 + (gameWidth-2*wall)/2);
-    
+
     // Initial Settings
     score = 0;
-    sizeTxt = floor(windowHeight * 0.065);
-    
+    // Setting the textSize according to the smaller between windowWidth and windowHeight
+    if (windowHeight < windowWidth) sizeTxt = floor(windowHeight * 0.065);
+    else sizeTxt = floor(windowWidth * 0.065);
+    // If the entire playable area can't be displayed this will redirect the game
+    // to the ending screen
+    if (gameWidth > windowWidth) {
+        dot.speed = 0;
+    }
+
     // Cheap and less time consuming solution for diplaying the first piece of food
     // Don't judge me
     food.isEaten = true;
