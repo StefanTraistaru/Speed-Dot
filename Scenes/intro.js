@@ -5,8 +5,9 @@ function Intro() {
     this.curScene = "Intro";
 
     this.setup = function() {
-        if (windowHeight < windowWidth) sizeTxt = floor(windowHeight * 0.08);
-        else sizeTxt = floor(windowWidth * 0.08);
+        // if (windowHeight < windowWidth) sizeTxt = floor(windowHeight * 0.08);
+        // else sizeTxt = floor(windowWidth * 0.08);
+        this.updateSizeTxt();
     }
 
     this.draw = function() {
@@ -28,6 +29,7 @@ function Intro() {
             }
 
             background(50);
+            this.updateSizeTxt();
             textSize(sizeTxt);
             textAlign(CENTER);
             textStyle(BOLD);
@@ -46,6 +48,13 @@ function Intro() {
         }
     }
 
+    this.updateSizeTxt = function() {
+        if (windowHeight < windowWidth) {
+            sizeTxt = floor(windowHeight * 0.08);
+        } else {
+            sizeTxt = floor(windowWidth * 0.08);
+        }
+    }
 
     this.keyPressed = function() {
         if (keyCode === ENTER) {

@@ -5,8 +5,7 @@ function Warning() {
     this.restart = 0;
 
     this.setup = function() {
-        if (windowHeight < windowWidth) sizeTxt = floor(windowHeight * 0.05);
-        else sizeTxt = floor(windowWidth * 0.05);
+        this.updateSizeTxt();
     }
 
     this.draw = function() {
@@ -25,6 +24,7 @@ function Warning() {
                 else this.restart = 0;
             }
             background(50);
+            this.updateSizeTxt();
             textSize(sizeTxt);
             textAlign(CENTER);
             textStyle(BOLD);
@@ -32,6 +32,14 @@ function Warning() {
             text("Please resize your window", windowWidth * 0.5, windowHeight * 0.45);
             textSize(sizeTxt * 0.6);
             text("Press SPACEBAR to restart", windowWidth/2, windowHeight * 0.6);
+        }
+    }
+
+    this.updateSizeTxt = function() {
+        if (windowHeight < windowWidth) {
+            sizeTxt = floor(windowHeight * 0.05);
+        } else {
+            sizeTxt = floor(windowWidth * 0.05);
         }
     }
 

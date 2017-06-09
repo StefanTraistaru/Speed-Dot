@@ -28,7 +28,6 @@ function Dot(up, down, left, right) {
 
     this.isDead = false;
 
-
     // Function for showing my dot
     this.show = function() {
         fill(255);
@@ -36,7 +35,6 @@ function Dot(up, down, left, right) {
         rectMode(CENTER);
         rect(this.x, this.y, this.dim, this.dim);
     }
-
 
     // Using this to set the direction in which the dot is going
     // It can't go to the opposite direction of the current direction
@@ -50,13 +48,11 @@ function Dot(up, down, left, right) {
         }
     }
 
-
     // Updating dot's x and y coordinates according to the direction and speed
     this.move = function() {
         this.x += this.xdir * this.speed;
         this.y += this.ydir * this.speed;
     }
-
 
     // Verifing if the dot is x_x(DEAD) = if it hits the margins
     this.update = function() {
@@ -66,7 +62,6 @@ function Dot(up, down, left, right) {
             this.speed = 0;
         if (this.speed == 0) this.isDead = true;
     }
-
 
     // Increasing the speed
     this.levelUp = function() {

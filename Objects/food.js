@@ -15,14 +15,12 @@ function Food(up, down, left, right) {
     // The score
     this.score = 0;
 
-
     // Showing the food
     this.show = function() {
         fill(0, 255, 0);
         rectMode(CENTER);
         rect(this.x, this.y, this.dim, this.dim);
     }
-
 
     // This will update the food position if "isEaten == true"
     this.update = function() {
@@ -32,7 +30,6 @@ function Food(up, down, left, right) {
             this.y = random(this.upM, this.downM);
         }
     }
-
 
     // Checking if the food is eaten or not
     this.eatCheck = function(x, y) {
@@ -47,5 +44,5 @@ function Food(up, down, left, right) {
             this.isEaten = true;
         else this.isEaten = false;
     }
-
+    
 }

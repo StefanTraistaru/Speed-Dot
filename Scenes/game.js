@@ -18,13 +18,8 @@ function Game() {
     this.curScene = "Game";
 
     this.setup = function() {
-        // Calculating game dimensions
-        gameHeight = windowHeight * 0.8;
-        // Setting a gameWidth / gameHeight ratio of 16:10
-        gameWidth = 16/10 * gameHeight;
-        wall = gameHeight * 0.02;
-        boardHeight = windowHeight * 0.1;
-        padding = windowHeight * 0.04;
+
+        this.getDimensions();
 
         // Creating objects
         surface = new Surface(gameWidth, gameHeight, wall, padding);
@@ -38,9 +33,7 @@ function Game() {
                         windowWidth/2 + (gameWidth-2*wall)/2);
 
         // Initial Settings
-        // Setting the textSize according to the smaller between windowWidth and windowHeight
-        if (windowHeight < windowWidth) sizeTxt = floor(windowHeight * 0.065);
-        else sizeTxt = floor(windowWidth * 0.065);
+        this.updateSizeTxt();
         // If the entire playable area can't be displayed this will redirect
         // the game to the ending screen
         if (gameWidth > windowWidth) {
@@ -87,8 +80,26 @@ function Game() {
         }
     }
 
+
     this.getScore = function() {
         return food.score;
+    }
+
+    this.getDimensions = function() {
+        gameHeight = windowHeight * 0.8;
+        // Setting a gameWidth / gameHeight ratio of 16:10
+        gameWidth = 16/10 * gameHeight;
+        wall = gameHeight * 0.02;
+        boardHeight = windowHeight * 0.1;
+        padding = windowHeight * 0.04;
+    }
+
+    this.updateSizeTxt = function() {
+        if (windowHeight < windowWidth) {
+            sizeTxt = floor(windowHeight * 0.065);
+        } else {
+            sizeTxt = floor(windowWidth * 0.065);
+        }
     }
 
     this.keyPressed = function() {

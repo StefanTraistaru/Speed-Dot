@@ -11,16 +11,15 @@ function EndScreen() {
 
     this.setup = function() {
         // Setting the textSize according to the smaller between windowWidth and windowHeight
-        if (windowHeight < windowWidth) sizeTxt = floor(windowHeight * 0.06);
-        else sizeTxt = floor(windowWidth * 0.06);
+        this.updateSizeTxt();
 
         // Getting the score from the game scene
         ogame = this.sceneManager.findScene(Game).oScene;
         this.score = ogame.getScore();
 
+        // Reseting the nhs
         nhs = 0;
     }
-
 
     this.draw = function() {
         // This will reset the EndScreen
@@ -45,7 +44,7 @@ function EndScreen() {
 
             background(50, 50, 50);
             fill(255);
-
+            this.updateSizeTxt();
             textAlign(CENTER);
             textStyle(BOLD);
 
@@ -71,6 +70,14 @@ function EndScreen() {
             text("Press SPACEBAR to restart", windowWidth/2, windowHeight * 0.8);
         }
 
+    }
+
+    this.updateSizeTxt = function() {
+        if (windowHeight < windowWidth) {
+            sizeTxt = floor(windowHeight * 0.06);
+        } else {
+            sizeTxt = floor(windowWidth * 0.06);
+        }
     }
 
     this.keyPressed = function() {
