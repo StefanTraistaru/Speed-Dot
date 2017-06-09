@@ -17,6 +17,8 @@ function EndScreen() {
         // Getting the score from the game scene
         ogame = this.sceneManager.findScene(Game).oScene;
         this.score = ogame.getScore();
+
+        nhs = 0;
     }
 
 
